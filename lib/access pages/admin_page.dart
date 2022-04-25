@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:covams_web/access%20pages/input_newuser_details.dart';
+import 'package:covams_web/access%20pages/register_vacc_centre.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
@@ -15,14 +16,15 @@ import '../../homepage building blocks/top_bar_contents.dart';
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
-class HospVaccCentPage extends StatefulWidget {
-  const HospVaccCentPage({Key? key}) : super(key: key);
+class AdminPage extends StatefulWidget {
+  const AdminPage({ Key? key }) : super(key: key);
 
   @override
-  _HospVaccCentPageState createState() => _HospVaccCentPageState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _HospVaccCentPageState extends State<HospVaccCentPage> {
+class _AdminPageState extends State<AdminPage> {
+  
   late ScrollController _scrollController;
   final double _scrollPosition = 0;
   double _opacity = 0.0;
@@ -108,7 +110,7 @@ class _HospVaccCentPageState extends State<HospVaccCentPage> {
 
                       FloatingTitleBar(screenSize: size),
                       const Spacer2(),
-                      const RegisterUserDetails(),
+                      const RegisterVaccCentre(),
                       const Spacer4(),
                       //----------------------------------------------------------------
                       const Spacer4(),

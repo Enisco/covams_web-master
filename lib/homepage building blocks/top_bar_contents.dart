@@ -5,6 +5,8 @@ import 'package:covams_web/main pages/about_us.dart';
 import '../main pages/dashboard.dart';
 import '../main.dart';
 
+String topBarString = 'My Account';
+
 class TopBarContents extends StatefulWidget {
   final double opacity;
 
@@ -213,33 +215,36 @@ class _TopBarContentsState extends State<TopBarContents> {
                   color: Colors.black45,
                   width: size.width / 12,
                   height: size.height / 23,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 3,
-                        width: 2,
-                      ),
-                      Text(
-                        'My Account',
-                        style: TextStyle(
-                          color:
-                              _isHovering[3] ? Colors.blue[200] : Colors.white,
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          height: 3,
+                          width: 2,
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Visibility(
-                        maintainAnimation: true,
-                        maintainState: true,
-                        maintainSize: true,
-                        visible: _isHovering[3],
-                        child: Container(
-                          height: 2,
-                          width: 20,
-                          color: Colors.white,
+                        Text(
+                          '$topBarString',
+                          style: TextStyle(
+                            color: _isHovering[3]
+                                ? Colors.blue[200]
+                                : Colors.white,
+                          ),
                         ),
-                      )
-                    ],
+                        const SizedBox(height: 5),
+                        Visibility(
+                          maintainAnimation: true,
+                          maintainState: true,
+                          maintainSize: true,
+                          visible: _isHovering[3],
+                          child: Container(
+                            height: 2,
+                            width: 20,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 onPressed: () {

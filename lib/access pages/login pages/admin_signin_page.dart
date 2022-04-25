@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:covams_web/access%20pages/admin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
@@ -158,8 +159,9 @@ class _AdminSignInState extends State<AdminSignIn> {
             style: TextStyle(
               fontFamily: 'Poppins',
               // color: Colors.black,
-              fontSize:  ResponsiveWidget.isSmallScreen(context)
-          ? size.width / 20: size.width / 60,
+              fontSize: ResponsiveWidget.isSmallScreen(context)
+                  ? size.width / 20
+                  : size.width / 60,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -175,8 +177,9 @@ class _AdminSignInState extends State<AdminSignIn> {
               "Welcome Back! Enter your details to continue",
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize:  ResponsiveWidget.isSmallScreen(context)
-          ? size.width / 25: size.width / 70,
+                fontSize: ResponsiveWidget.isSmallScreen(context)
+                    ? size.width / 25
+                    : size.width / 70,
                 // color: Colors.black38,
               ),
             ),
@@ -238,15 +241,20 @@ class _AdminSignInState extends State<AdminSignIn> {
           //---------------------------------------------------------------------------------------------------------
 
           const Spacer4(),
-          const SignInButton(pressed: adminLoginAction),
+          SignInButton(pressed: adminLoginAction),
           const Spacer1(),
           //---------------------------------------------------------------------------------------------------------
         ],
       ),
     );
   }
-}
 
-void adminLoginAction() {
-  
+  void adminLoginAction() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AdminPage(),
+      ),
+    );
+  }
 }

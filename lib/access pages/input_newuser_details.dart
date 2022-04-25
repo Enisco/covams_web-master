@@ -28,14 +28,14 @@ var firstJabDate;
 var secondJabDate;
 var boosterJabDate;
 
-class AddDetails extends StatefulWidget {
-  const AddDetails({Key? key}) : super(key: key);
+class RegisterUserDetails extends StatefulWidget {
+  const RegisterUserDetails({Key? key}) : super(key: key);
 
   @override
-  State<AddDetails> createState() => _AddDetailsState();
+  State<RegisterUserDetails> createState() => _RegisterUserDetailsState();
 }
 
-class _AddDetailsState extends State<AddDetails> {
+class _RegisterUserDetailsState extends State<RegisterUserDetails> {
   void uploadData() {
     FirebaseFirestore.instance //add new doc to the data store
         .collection("covamsdata")
@@ -88,7 +88,6 @@ class _AddDetailsState extends State<AddDetails> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-        child: Container(
       height: size.height * 1.8,
       width: size.width,
       margin: EdgeInsets.symmetric(horizontal: size.width / 8, vertical: 10),
@@ -106,7 +105,6 @@ class _AddDetailsState extends State<AddDetails> {
             Text(
               "Add new user data",
               style: TextStyle(
-                color: Colors.black,
                 fontFamily: 'Poppins',
                 fontSize: size.height / 30,
                 fontWeight: FontWeight.bold,
@@ -125,7 +123,6 @@ class _AddDetailsState extends State<AddDetails> {
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: size.height / 43,
-                  color: Colors.black38,
                 ),
               ),
             ),
@@ -356,7 +353,6 @@ class _AddDetailsState extends State<AddDetails> {
 
             Container(
               decoration: const BoxDecoration(
-                // color: Colors.grey[200],
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
@@ -377,10 +373,14 @@ class _AddDetailsState extends State<AddDetails> {
                 textAlignVertical: const TextAlignVertical(y: 0.0),
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(10),
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    // borderSide: BorderSide(color: Colors.green),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
+                    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                    borderSide: BorderSide(color: Colors.blueGrey),
+                  ),
                   labelText: '903 224 2379',
                   labelStyle: TextStyle(
                     fontFamily: 'Poppins',
@@ -479,30 +479,32 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Container(
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              padding: EdgeInsets.symmetric(
+                  vertical: 3, horizontal: size.width / 100),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade600,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "First Jab     ",
                     style: TextStyle(
-                      // color: Colors.black26,
-                      fontFamily: 'Poppins',
-                      fontSize: size.height / 47,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontFamily: 'Poppins',
+                        fontSize: size.height / 65,
+                        fontWeight: FontWeight.w300),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.calendar_month_outlined,
                       color: Colors.amber[900],
                     ),
-                    iconSize: size.height / 30,
+                    iconSize: size.height / 35,
                     onPressed: () {
                       _firstDate(context);
                     },
@@ -519,31 +521,32 @@ class _AddDetailsState extends State<AddDetails> {
 
             Container(
               padding: EdgeInsets.symmetric(
-                  vertical: 3, horizontal: size.width / 80),
-              decoration: const BoxDecoration(
+                  vertical: 3, horizontal: size.width / 100),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade600,
+                ),
                 // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Second Jab",
                     style: TextStyle(
-                      // color: Colors.black26,
-                      fontFamily: 'Poppins',
-                      fontSize: size.height / 47,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontFamily: 'Poppins',
+                        fontSize: size.height / 65,
+                        fontWeight: FontWeight.w300),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.calendar_month_outlined,
                       color: Colors.amber[900],
                     ),
-                    iconSize: size.height / 30,
+                    iconSize: size.height / 35,
                     onPressed: () {
                       _secondDate(context);
                     },
@@ -559,32 +562,32 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Container(
-              // padding: EdgeInsets.symmetric(
-              //     vertical: 3, horizontal: size.width / 80),
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              padding: EdgeInsets.symmetric(
+                  vertical: 3, horizontal: size.width / 100),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade600,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Booster Jab",
                     style: TextStyle(
-                      // color: Colors.black26,
-                      fontFamily: 'Poppins',
-                      fontSize: size.height / 47,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontFamily: 'Poppins',
+                        fontSize: size.height / 65,
+                        fontWeight: FontWeight.w300),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.calendar_month_outlined,
                       color: Colors.amber[900],
                     ),
-                    iconSize: size.height / 30,
+                    iconSize: size.height / 35,
                     onPressed: () {
                       _boosterDate(context);
                     },
@@ -677,7 +680,7 @@ class _AddDetailsState extends State<AddDetails> {
           ],
         ),
       ),
-    ));
+    );
   }
   //---------------------------****************************--------------------------
 

@@ -131,6 +131,7 @@ class _HospVaccCentSignInPageState extends State<HospVaccCentSignInPage> {
     );
   }
 }
+//---------------------------------*********************---------------------------------
 
 class HospVaccCentreSignIn extends StatefulWidget {
   const HospVaccCentreSignIn({Key? key}) : super(key: key);
@@ -245,7 +246,7 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
           //---------------------------------------------------------------------------------------------------------
         ],
       ),
-    );
+    ); 
   }
 
   void hospVaccCentLoginAction() {
