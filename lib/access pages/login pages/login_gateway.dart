@@ -1,6 +1,9 @@
 // ignore_for_file: unused_element
 
-import 'package:covams_web/access%20pages/login%20pages/signin_page.dart';
+import 'package:covams_web/access%20pages/login%20pages/admin_signin_page.dart';
+import 'package:covams_web/access%20pages/login%20pages/hospvacc_cent_signin_page.dart';
+import 'package:covams_web/access%20pages/login%20pages/user_signin_page.dart';
+import 'package:covams_web/access%20pages/login%20pages/verif_cent_signin_page.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
@@ -36,7 +39,7 @@ class LoginGatewayWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SignInPage()),
+              MaterialPageRoute(builder: (context) => const AdminSignInPage()),
             );
           },
           child: Container(
@@ -67,7 +70,7 @@ class LoginGatewayWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AdminLogin()),
+              MaterialPageRoute(builder: (context) => const HospVaccCentSignInPage()),
             );
           },
           child: Container(
@@ -98,7 +101,8 @@ class LoginGatewayWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AdminLogin()),
+              MaterialPageRoute(
+                  builder: (context) => const VerifCentreSignInPage()),
             );
           },
           child: Container(
@@ -129,7 +133,7 @@ class LoginGatewayWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AdminLogin()),
+              MaterialPageRoute(builder: (context) => const UserSignInPage()),
             );
           },
           child: Container(
@@ -276,19 +280,5 @@ class _LoginGatewayState extends State<LoginGateway> {
         ),
       ),
     );
-  }
-}
-
-class AdminLogin extends StatefulWidget {
-  const AdminLogin({Key? key}) : super(key: key);
-
-  @override
-  State<AdminLogin> createState() => _AdminLoginState();
-}
-
-class _AdminLoginState extends State<AdminLogin> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

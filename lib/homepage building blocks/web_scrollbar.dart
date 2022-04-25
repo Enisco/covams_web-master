@@ -32,14 +32,16 @@ class _WebScrollbarState extends State<WebScrollbar> {
   late Timer timer;
 
   _scrollListener() {
-    setState(() {
-      _scrollPosition = widget.controller.position.pixels;
-    });
+    if (mounted) {
+      setState(() {
+        _scrollPosition = widget.controller.position.pixels;
+      });
+    }
   }
 
   @override
   void initState() {
-    widget.controller.addListener(_scrollListener);
+    // widget.controller.addListener(_scrollListener);
     _isUpdating = false;
     super.initState();
   }
@@ -63,14 +65,18 @@ class _WebScrollbarState extends State<WebScrollbar> {
         if (notification.depth == 0) {
           if (notification is ScrollUpdateNotification) {
             timer.cancel();
-            setState(() {
-              _isUpdating = true;
-            });
+            if (mounted) {
+              setState(() {
+                _isUpdating = true;
+              });
+            }
           } else {
             timer = Timer(const Duration(seconds: 5), () {
-              setState(() {
-                _isUpdating = false;
-              });
+              if (mounted) {
+                setState(() {
+                  _isUpdating = false;
+                });
+              }
             });
           }
         }
@@ -116,16 +122,20 @@ class _WebScrollbarState extends State<WebScrollbar> {
                   ),
                   onTapCancel: () {
                     timer = Timer(const Duration(seconds: 5), () {
-                      setState(() {
-                        _isUpdating = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          _isUpdating = false;
+                        });
+                      }
                     });
                   },
                   onTapDown: (details) {
                     timer.cancel();
-                    setState(() {
-                      _isUpdating = true;
-                    });
+                    if (mounted) {
+                      setState(() {
+                        _isUpdating = true;
+                      });
+                    }
                   },
                   onVerticalDragUpdate: (dragUpdate) {
                     widget.controller.position.moveTo(dragUpdate
@@ -137,20 +147,22 @@ class _WebScrollbarState extends State<WebScrollbar> {
                             _scrollPosition /
                             widget.controller.position.maxScrollExtent));
 
-                    setState(() {
-                      if (dragUpdate.globalPosition.dy >= 0 &&
-                          _scrollPosition <=
-                              widget.controller.position.maxScrollExtent) {
-                        _scrollPosition = dragUpdate.globalPosition.dy +
-                            dragUpdate.globalPosition.dy *
-                                (_scrollPosition /
-                                    widget
-                                        .controller.position.maxScrollExtent) -
-                            (_scrollerHeight *
-                                _scrollPosition /
-                                widget.controller.position.maxScrollExtent);
-                      }
-                    });
+                    if (mounted) {
+                      setState(() {
+                        if (dragUpdate.globalPosition.dy >= 0 &&
+                            _scrollPosition <=
+                                widget.controller.position.maxScrollExtent) {
+                          _scrollPosition = dragUpdate.globalPosition.dy +
+                              dragUpdate.globalPosition.dy *
+                                  (_scrollPosition /
+                                      widget.controller.position
+                                          .maxScrollExtent) -
+                              (_scrollerHeight *
+                                  _scrollPosition /
+                                  widget.controller.position.maxScrollExtent);
+                        }
+                      });
+                    }
                   },
                 ),
               ),

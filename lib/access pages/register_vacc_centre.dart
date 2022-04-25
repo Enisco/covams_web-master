@@ -28,17 +28,18 @@ var firstJabDate;
 var secondJabDate;
 var boosterJabDate;
 
-class AddDetails extends StatefulWidget {
-  const AddDetails({Key? key}) : super(key: key);
+class AddNewVaccCentre extends StatefulWidget {
+  const AddNewVaccCentre({ Key? key }) : super(key: key);
 
   @override
-  State<AddDetails> createState() => _AddDetailsState();
+  State<AddNewVaccCentre> createState() => _AddNewVaccCentreState();
 }
 
-class _AddDetailsState extends State<AddDetails> {
+class _AddNewVaccCentreState extends State<AddNewVaccCentre> {
+
   void uploadData() {
     FirebaseFirestore.instance //add new doc to the data store
-        .collection("covamsdata")
+        .collection("covamsVaccCentredata")
         .doc(vaccIdController.text)
         .set({
       "Surname": surnameController.text,
@@ -104,7 +105,7 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Text(
-              "Add new user data",
+              "Register new Vaccination Centre",
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'Poppins',
@@ -121,7 +122,7 @@ class _AddDetailsState extends State<AddDetails> {
                 maxWidth: size.width,
               ),
               child: Text(
-                "Full details is required to create user's account",
+                "These details are essential to add new vaccination centre",
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: size.height / 43,
@@ -134,217 +135,34 @@ class _AddDetailsState extends State<AddDetails> {
             const Spacer3(),
             //---------------------------------------------------------------------------------------------------------
 
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
               width: size.width,
               height: size.height / 18,
               child: TextField(
                 controller: surnameController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Surname',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Enter user's surname",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: firstnameController,
                 style: const TextStyle(
                     fontFamily: 'Poppins',
-                    // color: Colors.black,
+                    color: Colors.black,
                     fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'First name',
-                  labelStyle: const TextStyle(
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Hospital/Vaccination Centre Name (in full)',
+                  labelStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
-                  fillColor: Colors.white,
-                  hintText: "Enter user's first name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
+                  hintText: "Enter the name of the Hospital/Vaccination Centre (in full)",
+                  hintStyle: TextStyle(
                     fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: midnameController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Middle name',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Enter user's middle name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: ageController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Age',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "How old is the user?",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: genderController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Gender',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Male/Female",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: emailAddressController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Email Address',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Enter user's email address",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ),
-            ),
-            //---------------------------------------------------------------------------------------------------------
-
-            const Spacer2(),
-            //---------------------------------------------------------------------------------------------------------
-
-            SizedBox(
-              width: size.width,
-              height: size.height / 18,
-              child: TextField(
-                controller: addressController,
-                cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Residential Address',
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Enter user's address",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
               ),
@@ -355,9 +173,229 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Container(
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: firstnameController,
+                style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'First name',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "Enter user's first name",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: midnameController,
+                style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Middle name',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "Enter user's middle name",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: ageController,
+                style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Age',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "How old is the user?",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: genderController,
+                style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Gender',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "Male/Female",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: emailAddressController,
+                style: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Email Address',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "Enter user's email address",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
+              width: size.width,
+              height: size.height / 18,
+              child: TextField(
+                controller: addressController,
+                style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Residential Address',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                  hintText: "Enter user's address",
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
               height: size.height / 18,
@@ -379,15 +417,17 @@ class _AddDetailsState extends State<AddDetails> {
                   contentPadding: EdgeInsets.all(10),
                   border: InputBorder.none,
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
                   labelText: '903 224 2379',
                   labelStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                   hintText: "Your Phone Number",
                   hintStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
                 onChanged: (phone) {
@@ -404,28 +444,34 @@ class _AddDetailsState extends State<AddDetails> {
             const Spacer2(),
             //---------------------------------------------------------------------------------------------------------
 
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
               width: size.width,
               height: size.height / 18,
               child: TextField(
                 controller: mIdController,
-                cursorColor: Colors.blueGrey,
                 style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Means of Identification',
-                  labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Means of Identification',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                   hintText: "NIN/Voter's card/Driver's License/International",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
               ),
@@ -435,28 +481,34 @@ class _AddDetailsState extends State<AddDetails> {
             const Spacer2(),
             //---------------------------------------------------------------------------------------------------------
 
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
               width: size.width,
               height: size.height / 18,
               child: TextField(
                 controller: vaccHospNameController,
-                cursorColor: Colors.blueGrey,
                 style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Vaccination centre name',
-                  labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Vaccination centre name',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                   hintText: "Enter Vaccination centre name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
               ),
@@ -479,9 +531,11 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Container(
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              padding: EdgeInsets.symmetric(
+                  vertical: 3, horizontal: size.width / 80),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
               height: size.height / 18,
@@ -491,7 +545,7 @@ class _AddDetailsState extends State<AddDetails> {
                   Text(
                     "First Jab     ",
                     style: TextStyle(
-                      // color: Colors.black26,
+                      color: Colors.black26,
                       fontFamily: 'Poppins',
                       fontSize: size.height / 47,
                       fontWeight: FontWeight.w500,
@@ -520,9 +574,9 @@ class _AddDetailsState extends State<AddDetails> {
             Container(
               padding: EdgeInsets.symmetric(
                   vertical: 3, horizontal: size.width / 80),
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
               height: size.height / 18,
@@ -532,7 +586,7 @@ class _AddDetailsState extends State<AddDetails> {
                   Text(
                     "Second Jab",
                     style: TextStyle(
-                      // color: Colors.black26,
+                      color: Colors.black26,
                       fontFamily: 'Poppins',
                       fontSize: size.height / 47,
                       fontWeight: FontWeight.w500,
@@ -559,11 +613,11 @@ class _AddDetailsState extends State<AddDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             Container(
-              // padding: EdgeInsets.symmetric(
-              //     vertical: 3, horizontal: size.width / 80),
-              decoration: const BoxDecoration(
-                // color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              padding: EdgeInsets.symmetric(
+                  vertical: 3, horizontal: size.width / 80),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
               height: size.height / 18,
@@ -573,7 +627,7 @@ class _AddDetailsState extends State<AddDetails> {
                   Text(
                     "Booster Jab",
                     style: TextStyle(
-                      // color: Colors.black26,
+                      color: Colors.black26,
                       fontFamily: 'Poppins',
                       fontSize: size.height / 47,
                       fontWeight: FontWeight.w500,
@@ -601,28 +655,34 @@ class _AddDetailsState extends State<AddDetails> {
             const Spacer2(),
             //---------------------------------------------------------------------------------------------------------
 
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
               width: size.width,
               height: size.height / 18,
               child: TextField(
                 controller: vaccIdController,
-                cursorColor: Colors.blueGrey,
                 style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Vaccination ID',
-                  labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Vaccination ID',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                   hintText: "Give user a uniqe Vaccination ID",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
               ),
@@ -632,28 +692,34 @@ class _AddDetailsState extends State<AddDetails> {
             const Spacer2(),
             //---------------------------------------------------------------------------------------------------------
 
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              ),
               width: size.width,
               height: size.height / 18,
               child: TextField(
                 controller: passwordGivenController,
-                cursorColor: Colors.blueGrey,
                 style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                  ),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                   hintText: "Give user his password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.black38,
                   ),
                 ),
               ),

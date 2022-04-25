@@ -45,7 +45,11 @@ class BlackNextButton extends StatelessWidget {
 }
 
 class SignInButton extends StatelessWidget {
-  const SignInButton({Key? key}) : super(key: key);
+  final Function pressed;
+
+  const SignInButton({
+    required this.pressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,22 +75,8 @@ class SignInButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              // ignore: avoid_print
               print("Signed In");
-
-              Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft,
-                    curve: Curves.easeInToLinear,
-                    duration: const Duration(milliseconds: 1000),
-                    reverseDuration: const Duration(milliseconds: 1000),
-                    child:  Container(
-                      color: Colors.green,
-                    ),
-                    inheritTheme: true,
-                    ctx: context),
-              );
+              pressed();
             },
           ),
         ),

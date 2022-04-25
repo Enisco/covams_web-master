@@ -66,10 +66,12 @@ class BottomBarForSmallScreen extends StatelessWidget {
           ),
           //------------------
 
-          SizedBox(
-            width: size.width,
-            height: size.height * 0.30,
-            child: const RightDownSmallScreen(),
+          Center(
+            child: SizedBox(
+              width: size.width,
+              height: size.height * 0.30,
+              child: const RightDownSmallScreen(),
+            ),
           ),
           Container(
             width: size.width - (size.width / 10),
