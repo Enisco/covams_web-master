@@ -54,7 +54,7 @@ class BottomBarForSmallScreen extends StatelessWidget {
           const Spacer1(),
           SizedBox(
             width: size.width,
-            height: size.height * 0.25,
+            height: size.height * 0.20,
             child: const LeftDown(),
           ),
           //------------------
@@ -69,7 +69,7 @@ class BottomBarForSmallScreen extends StatelessWidget {
           Center(
             child: SizedBox(
               width: size.width,
-              height: size.height * 0.30,
+              height: size.height * 0.20,
               child: const RightDownSmallScreen(),
             ),
           ),
@@ -103,16 +103,20 @@ class BottomBarForBigScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Spacer3(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: size.width * 0.45,
-                    height: size.height * 0.20,
+                    height: size.height * 0.30,
                     child: const LeftDown(),
                   ),
                   //------------------
+
+                  SizedBox(
+                    width: size.width * 0.04,
+                    height: size.height * 0.15,
+                  ),
 
                   Container(
                     width: 1,
@@ -123,9 +127,9 @@ class BottomBarForBigScreen extends StatelessWidget {
 
                   SizedBox(
                     width: size.width * 0.45,
-                    height: size.height * 0.20,
+                    height: size.height * 0.30,
                     child: const RightDown(),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -162,7 +166,7 @@ class LeftDown extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Spacer3(),
+        const Spacer2(),
         //--------------------------------------------------------------------------
         RichText(
           text: TextSpan(
@@ -171,7 +175,7 @@ class LeftDown extends StatelessWidget {
               fontFamily: 'Montserrat',
               color: Colors.white70,
               fontSize: ResponsiveWidget.isSmallScreen(context)
-                  ? size.width / 35
+                  ? size.width / 25
                   : size.width / 75,
               fontWeight: FontWeight.w500,
             ),
@@ -182,7 +186,7 @@ class LeftDown extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   color: Colors.blue.withOpacity(0.6),
                   fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? size.width / 35
+                      ? size.width / 25
                       : size.width / 75,
                   fontWeight: FontWeight.w500,
                 ),
@@ -204,7 +208,7 @@ class LeftDown extends StatelessWidget {
               fontFamily: 'Montserrat',
               color: Colors.white70,
               fontSize: ResponsiveWidget.isSmallScreen(context)
-                  ? size.width / 35
+                  ? size.width / 25
                   : size.width / 75,
               fontWeight: FontWeight.w500,
             ),
@@ -215,7 +219,7 @@ class LeftDown extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   color: Colors.blue.withOpacity(0.6),
                   fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? size.width / 35
+                      ? size.width / 25
                       : size.width / 75,
                   fontWeight: FontWeight.w500,
                 ),
@@ -227,7 +231,7 @@ class LeftDown extends StatelessWidget {
             ],
           ),
         ),
-        const Spacer3(),
+        const Spacer2(),
         //--------------------------------------------------------------------------
       ],
     );
@@ -244,7 +248,6 @@ class RightDownSmallScreen extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         //--------------------------------------------------------------------------
 
@@ -430,10 +433,15 @@ class DownDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
 
-    return const Text(
+    return Text(
       "© CopyRight 2020 | CoVaMS 2022",
-      style: TextStyle(fontSize: 16, fontFamily: 'Montserrat'),
+      style: TextStyle(
+          fontSize: ResponsiveWidget.isSmallScreen(context)
+              ? size.width / 30
+              : size.width / 75,
+          fontFamily: 'Montserrat'),
     );
   }
 }

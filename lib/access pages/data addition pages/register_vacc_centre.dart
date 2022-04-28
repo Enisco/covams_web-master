@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
 
-import 'package:covams_web/access%20pages/input_newuser_details.dart';
+import 'package:covams_web/access%20pages/data%20addition%20pages/reg_newuser_details.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-TextEditingController verifCentrefullNameController = TextEditingController();
+TextEditingController hospitalfullNameController = TextEditingController();
 TextEditingController addressController = TextEditingController();
 TextEditingController emailAddressController = TextEditingController();
 TextEditingController passwordGivenController = TextEditingController();
@@ -18,20 +18,22 @@ var vaccCentrePhoneNumber;
 DateTime regSelectedDate = DateTime.now();
 var registrationDate;
 
-class RegisterVerifCentre extends StatefulWidget {
-  const RegisterVerifCentre({Key? key}) : super(key: key);
+class RegisterVaccCentre extends StatefulWidget {
+  const RegisterVaccCentre({Key? key}) : super(key: key);
 
   @override
-  State<RegisterVerifCentre> createState() => _RegisterVerifCentreState();
+  State<RegisterVaccCentre> createState() => _RegisterVaccCentreState();
 }
 
-class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
+class _RegisterVaccCentreState extends State<RegisterVaccCentre> {
   void uploadData() {
     FirebaseFirestore.instance //add new doc to the data store
-        .collection("covamsVerifCentreData")
+        // .collection("vaccncents")
+        .collection("covamsdata")
         .doc(uniqueIdController.text)
         .set({
-      "Hospital/Vaccination Centre name": vaccHospNameController.text,
+      "Account Type": "Hospital/Vaccination Centre",
+      "Hospital/Vaccination Centre name": hospitalfullNameController.text,
       "Address": addressController.text,
       "Email Address": emailAddressController.text,
       "Phone Number": vaccCentrePhoneNumber,
@@ -52,7 +54,7 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
   }
 
   void resetTextControllers() {
-    verifCentrefullNameController.text = '';
+    hospitalfullNameController.text = '';
     addressController.text = '';
     emailAddressController.text = '';
     passwordGivenController.text = '';
@@ -78,7 +80,7 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
             //---------------------------------------------------------------------------------------------------------
 
             Text(
-              "Register new Verification Centre",
+              "Register new Hospital/Vaccination Centre",
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: size.height / 30,
@@ -94,7 +96,7 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
                 maxWidth: size.width,
               ),
               child: Text(
-                "Full details is required to create Verification Centre's account",
+                "Full details is required to create Hospital/Vaccination Centre's account",
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: size.height / 43,
@@ -110,16 +112,16 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
               width: size.width,
               height: size.height / 18,
               child: TextField(
-                controller: verifCentrefullNameController,
+                controller: hospitalfullNameController,
                 cursorColor: Colors.blueGrey,
                 style: const TextStyle(
                     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
-                  labelText: 'Verification Centre Name',
+                  labelText: 'Hospital/Vaccination Centre Name',
                   labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
                   ),
-                  hintText: "Enter the name of the Verification Centre",
+                  hintText: "Enter the name of the Hospital/Vaccination Centre",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -201,6 +203,9 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
 
             Container(
               decoration: const BoxDecoration(
+                // border: Border.all(
+                //   color: Colors.black38,
+                // ),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
@@ -291,7 +296,6 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
             ),
             const Spacer0(),
             //---------------------------------------------------------------------------------------------------------
-            
             const Spacer2(),
             //---------------------------------------------------------------------------------------------------------
 
@@ -393,7 +397,7 @@ class _RegisterVerifCentreState extends State<RegisterVerifCentre> {
   }
 }
 
-// class RegisterVerifCentreSuccess extends StatelessWidget {
+// class RegisterHospVaccCentreSuccess extends StatelessWidget {
 //   const RegisterHospVaccCentreSuccess({Key? key}) : super(key: key);
 
 //   @override

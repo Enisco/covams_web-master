@@ -1,31 +1,30 @@
-// ignore_for_file: avoid_print
-
-import 'package:covams_web/access%20pages/input_newuser_details.dart';
-import 'package:flutter/material.dart';
-import 'package:covams_web/components/buttons.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/components/my_spacers.dart';
-import 'package:covams_web/homepage%20building%20blocks/covams_drawer.dart';
+import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
-import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
-import '../../homepage building blocks/floating_text.dart';
-import '../../homepage building blocks/top_bar_contents.dart';
+import 'package:flutter/material.dart';
 
-TextEditingController usernameController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
-
-class HospVaccCentPage extends StatefulWidget {
-  const HospVaccCentPage({Key? key}) : super(key: key);
+class LoggedInDashboard extends StatefulWidget {
+  const LoggedInDashboard({Key? key}) : super(key: key);
 
   @override
-  _HospVaccCentPageState createState() => _HospVaccCentPageState();
+  _LoggedInDashboardState createState() => _LoggedInDashboardState();
 }
 
-class _HospVaccCentPageState extends State<HospVaccCentPage> {
+class _LoggedInDashboardState extends State<LoggedInDashboard> {
   late ScrollController _scrollController;
-  final double _scrollPosition = 0;
+  double _scrollPosition = 0;
   double _opacity = 0.0;
+
+  _scrollListener() {
+    setState(() {
+      _scrollPosition = _scrollController.position.pixels;
+    });
+  }
 
   @override
   void initState() {
@@ -76,9 +75,10 @@ class _HospVaccCentPageState extends State<HospVaccCentPage> {
             )
           : PreferredSize(
               preferredSize: Size(size.width, 1000),
-              child: TopBarContents(_opacity),
+              child: TopBarLoggedInContent(_opacity),
             ),
-      drawer: const ExploreDrawer(),
+      drawer: const LogInDrawer(),
+      // drawer: const CovamDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -107,15 +107,23 @@ class _HospVaccCentPageState extends State<HospVaccCentPage> {
                       //----------------------------------------------------------------
 
                       FloatingTitleBar(screenSize: size),
-                      const Spacer2(),
-                      const RegisterUserDetails(),
+                      // DashBoard(screenSize: size),
                       const Spacer4(),
                       //----------------------------------------------------------------
-                      const Spacer4(),
+
+                      Container(
+                        color: Colors.teal,
+                        height: size.height / 2,
+                        width: size.width,
+                      )
                     ],
                   ),
                 ],
               ),
+              // DestinationHeading(screenSize: size),
+              // DestinationCarousel(),
+              // SizedBox(height: size.height / 10),
+              // BottomBar(),
               const BottomSection(),
             ],
           ),

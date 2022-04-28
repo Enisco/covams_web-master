@@ -1,6 +1,11 @@
 // ignore_for_file: avoid_print
 
-import 'package:covams_web/homepage%20building%20blocks/covams_drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/stakeholders%20pages/verif_cent_page.dart';
+import 'package:covams_web/blocs/appbar_string_bloc.dart';
+import 'package:covams_web/blocs/login_string_bloc.dart';
+import 'package:covams_web/blocs/logintype_index.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
@@ -13,6 +18,7 @@ import '../../homepage building blocks/top_bar_contents.dart';
 
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
+String errorMessage = '';
 
 class VerifCentreSignInPage extends StatefulWidget {
   const VerifCentreSignInPage({Key? key}) : super(key: key);
@@ -84,7 +90,8 @@ class _VerifCentreSignInPageState extends State<VerifCentreSignInPage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarContents(_opacity),
             ),
-      drawer: const ExploreDrawer(),
+      // drawer: const CovamDrawer(),
+      drawer: const LogInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -139,7 +146,7 @@ class VerifCentreSignIn extends StatefulWidget {
 }
 
 class _VerifCentreSignInState extends State<VerifCentreSignIn> {
-  bool _isObscure = true;
+  final bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -158,8 +165,10 @@ class _VerifCentreSignInState extends State<VerifCentreSignIn> {
             style: TextStyle(
               fontFamily: 'Poppins',
               // color: Colors.black,
-fontSize:  ResponsiveWidget.isSmallScreen(context)
-          ? size.width / 20: size.width / 60,              fontWeight: FontWeight.bold,
+              fontSize: ResponsiveWidget.isSmallScreen(context)
+                  ? size.width / 20
+                  : size.width / 60,
+              fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(
@@ -174,8 +183,9 @@ fontSize:  ResponsiveWidget.isSmallScreen(context)
               "Welcome Back! Enter your details to continue",
               style: TextStyle(
                 fontFamily: 'Poppins',
-fontSize:  ResponsiveWidget.isSmallScreen(context)
-          ? size.width / 25: size.width / 70,                // color: Colors.black38,
+                fontSize: ResponsiveWidget.isSmallScreen(context)
+                    ? size.width / 25
+                    : size.width / 70, // color: Colors.black38,
               ),
             ),
           ),
@@ -190,7 +200,7 @@ fontSize:  ResponsiveWidget.isSmallScreen(context)
               height: size.height / 11,
               child: TextField(
                 keyboardType: TextInputType.number,
-                cursorColor: Colors.tealAccent,
+                // cursorColor: Colors.tealAccent,
                 controller: usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
@@ -215,7 +225,7 @@ fontSize:  ResponsiveWidget.isSmallScreen(context)
               height: size.height / 11,
               child: TextField(
                 keyboardType: TextInputType.number,
-                cursorColor: Colors.tealAccent,
+                // cursorColor: Colors.tealAccent,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -235,15 +245,106 @@ fontSize:  ResponsiveWidget.isSmallScreen(context)
           ),
           //---------------------------------------------------------------------------------------------------------
 
-
           const Spacer4(),
-          const SignInButton(pressed: verifCentLoginAction),
+          Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: size.height / 10, maxWidth: size.width / 1.5),
+              child: Text(
+                errorMessage,
+                style: TextStyle(color: Colors.red, fontSize: size.width / 40),
+              ),
+            ),
+          ),
+          //---------------------------------------------------------------------------------------------------------
+
+          const Spacer2(),
+          SignInButton(
+            pressed: () async {
+              if (usernameController.text == '' ||
+                  passwordController.text == '') {
+                print('Enter both username and password');
+                if (mounted) {
+                  setState(() {
+                    errorMessage = 'Enter both username and password';
+                  });
+                }
+              } else {
+                verifCentLoginAction();
+              }
+            },
+          ),
           const Spacer1(),
           //---------------------------------------------------------------------------------------------------------
         ],
       ),
     );
   }
-}
 
-void verifCentLoginAction() {}
+  void verifCentLoginAction() async {
+    String password = passwordController.text;
+    String readPassword, readAccountType;
+    String accountType = "Verification Centre";
+
+    final docSnapShot = await FirebaseFirestore.instance
+        .collection("covamsdata")
+        .doc(usernameController.text)
+        .get();
+    if (docSnapShot.exists) {
+      readPassword = docSnapShot.data()!["Password"].toString();
+      readAccountType = docSnapShot.data()!["Account Type"].toString();
+
+      print(readPassword);
+      print(readAccountType);
+
+      if (readPassword == password && readAccountType == accountType) {
+        print('Password matches: ${docSnapShot.data()!["Password"]}');
+        loginString = usernameController.text;
+        loginInt = 3;
+        appbarString =
+            docSnapShot.data()!["Vaccination Centre Name"].toString();
+        print('$loginInt :' + appbarString);
+
+        if (mounted) {
+          setState(() {
+            errorMessage = '';
+            usernameController.text = '';
+            passwordController.text = '';
+          });
+        }
+
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const VerifCentPage()),
+            (Route<dynamic> route) => false);
+
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const VerifCentPage()));
+      } else {
+        print('Password doesn\'t  match: ${docSnapShot.data()!["Password"]}');
+        print('Username or password Incorrect');
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Username or password Incorrect';
+          });
+        }
+      }
+
+      if (docSnapShot.data() == null) {
+        print('User not found');
+        print('Username or password Incorrect');
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Username or password Incorrect';
+          });
+        }
+      }
+    } else {
+      print('Username or password Incorrect');
+      if (mounted) {
+        setState(() {
+          errorMessage = 'Username or password Incorrect';
+        });
+      }
+    }
+  }
+}

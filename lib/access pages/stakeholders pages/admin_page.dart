@@ -1,40 +1,36 @@
-// ignore_for_file: unused_element
+// ignore_for_file: avoid_print
 
-
+import 'package:covams_web/access%20pages/data%20addition%20pages/register_vacc_centre.dart';
+import 'package:covams_web/access%20pages/data%20addition%20pages/register_verif_centre.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
-import 'package:covams_web/blocs/logintype_index.dart';
-import 'package:covams_web/components/my_spacers.dart';
-import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
-import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
-import 'package:covams_web/homepage%20building%20blocks/top_bar_contents.dart';
+import 'package:flutter/material.dart';
+import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
-import 'package:flutter/material.dart';
+import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import '../../homepage building blocks/floating_text.dart';
 
-class Aboutpage extends StatefulWidget {
-  const Aboutpage({Key? key}) : super(key: key);
+TextEditingController usernameController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+
+class AdminPage extends StatefulWidget {
+  const AdminPage({Key? key}) : super(key: key);
 
   @override
-  _AboutpageState createState() => _AboutpageState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _AboutpageState extends State<Aboutpage> {
+class _AdminPageState extends State<AdminPage> {
   late ScrollController _scrollController;
-  double _scrollPosition = 0;
+  final double _scrollPosition = 0;
   double _opacity = 0.0;
-
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
 
   @override
   void initState() {
     _scrollController = ScrollController();
-    // _scrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -59,12 +55,14 @@ class _AboutpageState extends State<Aboutpage> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () {
-                    setState(() {
-                      MyApp.themeNotifier.value =
-                          MyApp.themeNotifier.value == ThemeMode.light
-                              ? ThemeMode.dark
-                              : ThemeMode.light;
-                    });
+                    setState(
+                      () {
+                        MyApp.themeNotifier.value =
+                            MyApp.themeNotifier.value == ThemeMode.light
+                                ? ThemeMode.dark
+                                : ThemeMode.light;
+                      },
+                    );
                   },
                 ),
               ],
@@ -81,11 +79,10 @@ class _AboutpageState extends State<Aboutpage> {
             )
           : PreferredSize(
               preferredSize: Size(size.width, 1000),
-              child: TopBarContents(_opacity),
+              child: TopBarLoggedInContent(_opacity,),
             ),
         // drawer: const CovamDrawer(),
-        // drawer: const LogInDrawer(),
-        drawer: loginInt == 0? const CovamDrawer(): const LogInDrawer(),
+        drawer: const LogInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -114,10 +111,11 @@ class _AboutpageState extends State<Aboutpage> {
                       //----------------------------------------------------------------
 
                       FloatingTitleBar(screenSize: size),
-                      const AboutWidget(),
+                      const Spacer2(),
+                      const RegisterVaccCentre(),
+                      const RegisterVerifCentre(),
                       const Spacer4(),
                       //----------------------------------------------------------------
-                      const AboutWidget(),
                       const Spacer4(),
                     ],
                   ),
@@ -128,20 +126,6 @@ class _AboutpageState extends State<Aboutpage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class AboutWidget extends StatelessWidget {
-  const AboutWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.red,
-      height: size.height / 2,
-      width: size.width,
     );
   }
 }

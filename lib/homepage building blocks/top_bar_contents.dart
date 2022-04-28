@@ -1,3 +1,4 @@
+import 'package:covams_web/blocs/login_string_bloc.dart';
 import 'package:covams_web/main%20pages/covams_homepage.dart';
 import 'package:flutter/material.dart';
 import '../access pages/login pages/login_gateway.dart';
@@ -224,7 +225,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                           width: 2,
                         ),
                         Text(
-                          '$topBarString',
+                          topBarString,
                           style: TextStyle(
                             color: _isHovering[3]
                                 ? Colors.blue[200]

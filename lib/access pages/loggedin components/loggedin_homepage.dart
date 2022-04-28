@@ -1,26 +1,26 @@
-// ignore_for_file: unused_element
-
-
 import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
-import 'package:covams_web/blocs/logintype_index.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
+import 'package:covams_web/homepage%20building%20blocks/featured_heading.dart';
+import 'package:covams_web/homepage%20building%20blocks/featured_tiles.dart';
 import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
-import 'package:covams_web/homepage%20building%20blocks/top_bar_contents.dart';
+import 'package:covams_web/homepage%20building%20blocks/host_partners_carousel.dart';
+import 'package:covams_web/homepage%20building%20blocks/host_partners_heading.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 
-class Aboutpage extends StatefulWidget {
-  const Aboutpage({Key? key}) : super(key: key);
+class LoggedInHomePage extends StatefulWidget {
+  const LoggedInHomePage({Key? key}) : super(key: key);
 
   @override
-  _AboutpageState createState() => _AboutpageState();
+  State<LoggedInHomePage> createState() => _LoggedInHomePageState();
 }
 
-class _AboutpageState extends State<Aboutpage> {
+class _LoggedInHomePageState extends State<LoggedInHomePage> {
   late ScrollController _scrollController;
   double _scrollPosition = 0;
   double _opacity = 0.0;
@@ -34,7 +34,6 @@ class _AboutpageState extends State<Aboutpage> {
   @override
   void initState() {
     _scrollController = ScrollController();
-    // _scrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -81,11 +80,12 @@ class _AboutpageState extends State<Aboutpage> {
             )
           : PreferredSize(
               preferredSize: Size(size.width, 1000),
-              child: TopBarContents(_opacity),
+              child: TopBarLoggedInContent(
+                _opacity,
+              ),
             ),
-        // drawer: const CovamDrawer(),
-        // drawer: const LogInDrawer(),
-        drawer: loginInt == 0? const CovamDrawer(): const LogInDrawer(),
+      drawer: const LogInDrawer(),
+      // drawer: const CovamDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -114,11 +114,19 @@ class _AboutpageState extends State<Aboutpage> {
                       //----------------------------------------------------------------
 
                       FloatingTitleBar(screenSize: size),
-                      const AboutWidget(),
+                      FeaturedHeading(
+                        screenSize: size,
+                      ),
+                      FeaturedTiles(screenSize: size),
                       const Spacer4(),
                       //----------------------------------------------------------------
-                      const AboutWidget(),
-                      const Spacer4(),
+
+                      HostMinistriesHeading(screenSize: size),
+                      SizedBox(height: size.height / 10),
+                      const HostMinistriesCarousel(),
+                      PartnersHeading(screenSize: size),
+                      SizedBox(height: size.height / 10),
+                      const PartnersCarousel(),
                     ],
                   ),
                 ],
@@ -128,20 +136,6 @@ class _AboutpageState extends State<Aboutpage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class AboutWidget extends StatelessWidget {
-  const AboutWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.red,
-      height: size.height / 2,
-      width: size.width,
     );
   }
 }

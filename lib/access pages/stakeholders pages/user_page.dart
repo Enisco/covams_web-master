@@ -1,30 +1,33 @@
 // ignore_for_file: avoid_print
 
-import 'package:covams_web/access%20pages/input_newuser_details.dart';
-import 'package:covams_web/access%20pages/register_vacc_centre.dart';
+import 'package:covams_web/access%20pages/data%20addition%20pages/retrieve_data.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
+import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
-import 'package:covams_web/homepage%20building%20blocks/covams_drawer.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import '../../homepage building blocks/floating_text.dart';
-import '../../homepage building blocks/top_bar_contents.dart';
 
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
-class AdminPage extends StatefulWidget {
-  const AdminPage({ Key? key }) : super(key: key);
+class UserPage extends StatefulWidget {
+  UserPage({
+    Key? key,
+    required this.userUniqueID,
+  }) : super(key: key);
+
+  String userUniqueID;
 
   @override
-  State<AdminPage> createState() => _AdminPageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _AdminPageState extends State<AdminPage> {
-  
+class _UserPageState extends State<UserPage> {
   late ScrollController _scrollController;
   final double _scrollPosition = 0;
   double _opacity = 0.0;
@@ -56,12 +59,14 @@ class _AdminPageState extends State<AdminPage> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () {
-                    setState(() {
-                      MyApp.themeNotifier.value =
-                          MyApp.themeNotifier.value == ThemeMode.light
-                              ? ThemeMode.dark
-                              : ThemeMode.light;
-                    });
+                    setState(
+                      () {
+                        MyApp.themeNotifier.value =
+                            MyApp.themeNotifier.value == ThemeMode.light
+                                ? ThemeMode.dark
+                                : ThemeMode.light;
+                      },
+                    );
                   },
                 ),
               ],
@@ -78,9 +83,10 @@ class _AdminPageState extends State<AdminPage> {
             )
           : PreferredSize(
               preferredSize: Size(size.width, 1000),
-              child: TopBarContents(_opacity),
+              child: TopBarLoggedInContent(_opacity),
             ),
-      drawer: const ExploreDrawer(),
+        // drawer: const CovamDrawer(),
+        drawer: const LogInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -109,8 +115,11 @@ class _AdminPageState extends State<AdminPage> {
                       //----------------------------------------------------------------
 
                       FloatingTitleBar(screenSize: size),
-                      const Spacer2(),
-                      const RegisterVaccCentre(),
+                      const Spacer3(),
+                      RetrieveDataFromStore(
+                        userUniqueID: widget.userUniqueID,
+                        errMessage: '',
+                      ),
                       const Spacer4(),
                       //----------------------------------------------------------------
                       const Spacer4(),

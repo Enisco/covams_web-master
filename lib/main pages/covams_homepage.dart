@@ -1,5 +1,8 @@
+import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/blocs/logintype_index.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:flutter/material.dart';
 import '../homepage building blocks/featured_heading.dart';
 import '../homepage building blocks/featured_tiles.dart';
@@ -7,7 +10,6 @@ import '../homepage building blocks/floating_text.dart';
 import '../homepage building blocks/host_partners_heading.dart';
 import '../homepage building blocks/host_partners_carousel.dart';
 import '../homepage building blocks/web_scrollbar.dart';
-import '../homepage building blocks/covams_drawer.dart';
 import '../utilities/responsive.dart';
 import '../homepage building blocks/top_bar_contents.dart';
 import '../main.dart';
@@ -33,7 +35,6 @@ class _CovamsHomePageState extends State<CovamsHomePage> {
   @override
   void initState() {
     _scrollController = ScrollController();
-    //   _scrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -82,7 +83,9 @@ class _CovamsHomePageState extends State<CovamsHomePage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarContents(_opacity),
             ),
-      drawer: const ExploreDrawer(),
+        // drawer: const CovamDrawer(),
+        // drawer: const LogInDrawer(),
+        drawer: loginInt == 0? const CovamDrawer(): const LogInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

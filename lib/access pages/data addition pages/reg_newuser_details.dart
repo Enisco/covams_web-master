@@ -41,6 +41,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
         .collection("covamsdata")
         .doc(vaccIdController.text)
         .set({
+      "Account Type": "User",
       "Surname": surnameController.text,
       "First Name": firstnameController.text,
       "Middle Name": midnameController.text,
