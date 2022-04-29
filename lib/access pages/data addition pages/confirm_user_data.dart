@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:covams_web/access%20pages/data%20addition%20pages/retrieve_data.dart';
 import 'package:covams_web/access%20pages/stakeholders%20pages/user_page.dart';
 import 'package:covams_web/components/buttons.dart';

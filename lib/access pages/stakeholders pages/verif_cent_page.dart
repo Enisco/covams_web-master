@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:covams_web/access%20pages/data%20addition%20pages/confirm_user_data.dart';
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/components/my_spacers.dart';

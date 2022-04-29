@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, avoid_print
+
 import 'package:covams_web/access%20pages/loggedin%20components/loggedin_about_us.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/loggedin_dashboard.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/loggedin_homepage.dart';
@@ -93,7 +95,7 @@ class _LogInDrawerState extends State<LogInDrawer> {
           )
         ],
       ),
-      onTap: () {
+      onTap: () { 
         print('$loginInt');
         Navigator.push(
           context,

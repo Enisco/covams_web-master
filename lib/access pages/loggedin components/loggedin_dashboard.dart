@@ -1,7 +1,8 @@
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import 'package:covams_web/homepage%20building%20blocks/dashboard_elements.dart';
 import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
@@ -17,14 +18,14 @@ class LoggedInDashboard extends StatefulWidget {
 
 class _LoggedInDashboardState extends State<LoggedInDashboard> {
   late ScrollController _scrollController;
-  double _scrollPosition = 0;
+  final double _scrollPosition = 0;
   double _opacity = 0.0;
 
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
+  // _scrollListener() {
+  //   setState(() {
+  //     _scrollPosition = _scrollController.position.pixels;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -78,7 +79,6 @@ class _LoggedInDashboardState extends State<LoggedInDashboard> {
               child: TopBarLoggedInContent(_opacity),
             ),
       drawer: const LogInDrawer(),
-      // drawer: const CovamDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -111,11 +111,13 @@ class _LoggedInDashboardState extends State<LoggedInDashboard> {
                       const Spacer4(),
                       //----------------------------------------------------------------
 
-                      Container(
-                        color: Colors.teal,
-                        height: size.height / 2,
-                        width: size.width,
-                      )
+                      Padding(
+                        padding: EdgeInsets.all(
+                            ResponsiveWidget.isSmallScreen(context)
+                                ? (size.width * 0.1)
+                                : (size.width * 0.03)),
+                        child: const DashboardElements(),
+                      ),
                     ],
                   ),
                 ],

@@ -1,8 +1,7 @@
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
-import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:covams_web/homepage%20building%20blocks/featured_heading.dart';
 import 'package:covams_web/homepage%20building%20blocks/featured_tiles.dart';
 import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
@@ -22,14 +21,14 @@ class LoggedInHomePage extends StatefulWidget {
 
 class _LoggedInHomePageState extends State<LoggedInHomePage> {
   late ScrollController _scrollController;
-  double _scrollPosition = 0;
+  final double _scrollPosition = 0;
   double _opacity = 0.0;
 
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
+  // _scrollListener() {
+  //   setState(() {
+  //     _scrollPosition = _scrollController.position.pixels;
+  //   });
+  // }
 
   @override
   void initState() {

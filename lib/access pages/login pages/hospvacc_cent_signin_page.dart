@@ -1,13 +1,12 @@
 // ignore_for_file: avoid_print, unused_element
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/stakeholders%20pages/hosp_vacc_page.dart';
 import 'package:covams_web/blocs/appbar_string_bloc.dart';
 import 'package:covams_web/blocs/login_state_bloc.dart';
 import 'package:covams_web/blocs/login_string_bloc.dart';
 import 'package:covams_web/blocs/logintype_index.dart';
-import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
@@ -151,7 +150,7 @@ class HospVaccCentreSignIn extends StatefulWidget {
 }
 
 class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
-  final bool _isObscure = true;
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -229,8 +228,7 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                keyboardType: TextInputType.number,
-                // cursorColor: Colors.tealAccent,
+                  obscureText: _isObscure,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -244,6 +242,17 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
                   focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(18.0)),
                       borderSide: BorderSide(color: Colors.blueGrey)),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            _isObscure = !_isObscure;
+                          },
+                        );
+                      },
+                    ),
                 ),
               ),
             ),

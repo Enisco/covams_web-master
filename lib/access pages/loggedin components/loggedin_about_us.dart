@@ -1,10 +1,9 @@
 // ignore_for_file: unused_element
 
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
-import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
@@ -113,8 +112,6 @@ class _LoggedInAboutpageState extends State<LoggedInAboutpage> {
                       const AboutWidget(),
                       const Spacer4(),
                       //----------------------------------------------------------------
-                      const AboutWidget(),
-                      const Spacer4(),
                     ],
                   ),
                 ],
@@ -128,6 +125,7 @@ class _LoggedInAboutpageState extends State<LoggedInAboutpage> {
   }
 }
 
+
 class AboutWidget extends StatelessWidget {
   const AboutWidget({Key? key}) : super(key: key);
 
@@ -135,9 +133,54 @@ class AboutWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.red,
-      height: size.height / 2,
+      padding: EdgeInsets.symmetric(horizontal: size.width / 20, vertical: 10),
+      height: size.height / 3,
       width: size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Spacer2(),
+          Text(
+            "About us",
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: size.height / 30,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const Spacer2(),
+          //---------------------------------------------------------------------------------------------------------
+
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: size.width,
+              maxHeight: ResponsiveWidget.isSmallScreen(context)
+                  ? (size.height / 3)
+                  : (size.height / 3),
+            ),
+            child: Wrap(
+              children: [
+                Text(
+                  'The COVID-19 Vaccination Management System (CoVaMS) is a platform '
+                  'which serves as a central database where all the details of '
+                  'vaccinated citizens are stored for ease of mobile accessibility, '
+                  'especially for confirmation and verification at any point of necessity.'
+                  'With CoVaMS, the details of a vaccinated citizen can be '
+                  'confirmed, tracked and updated with ease.',
+                  style: TextStyle(
+                    fontSize: ResponsiveWidget.isSmallScreen(context)
+                        ? (size.width / 35)
+                        : (size.width / 75),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Spacer3(),
+          //----------------------------------***************************---------------------------------------------
+        ],
+      ),
     );
   }
 }

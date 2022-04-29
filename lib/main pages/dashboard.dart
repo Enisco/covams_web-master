@@ -1,4 +1,4 @@
-import 'package:covams_web/access%20pages/loggedin%20components/loggedinDrawer.dart';
+import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/blocs/logintype_index.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
@@ -127,10 +127,6 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ],
               ),
-              // DestinationHeading(screenSize: size),
-              // DestinationCarousel(),
-              // SizedBox(height: size.height / 10),
-              // BottomBar(),
               const BottomSection(),
             ],
           ),
