@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AppBarStringBloc>(
           create: (BuildContext context) => AppBarStringBloc(),
         ),
-      ],
+      ], 
       child: ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
         builder: (_, ThemeMode currentMode, __) {
