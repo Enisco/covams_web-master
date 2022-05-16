@@ -47,8 +47,11 @@ class _LogInDrawerState extends State<LogInDrawer> {
           const Spacer2(),
           const Center(
             child: Text(
-              "© CopyRight 2020 | CoVaMS 2022",
-              style: TextStyle(fontSize: 10, fontFamily: 'Montserrat'),
+              "© CopyRight | CoVaMS 2022", 
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white54,
+                  fontFamily: 'Montserrat'),
             ),
           ),
           const Spacer2(),
@@ -63,11 +66,15 @@ class _LogInDrawerState extends State<LogInDrawer> {
   Widget _LogOutDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(Icons.logout_rounded),
+        children: <Widget>[
+          const Icon(Icons.logout_rounded),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('Log Out'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Log Out',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -91,11 +98,15 @@ class _LogInDrawerState extends State<LogInDrawer> {
           const Icon(CupertinoIcons.square_favorites_alt),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: Text(appbarString),
+            child: Text(
+              appbarString,
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
-      onTap: () { 
+      onTap: () {
         print('$loginInt');
         Navigator.push(
           context,
@@ -109,11 +120,15 @@ class _LogInDrawerState extends State<LogInDrawer> {
   Widget _AboutDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(CupertinoIcons.person_2_alt),
+        children: <Widget>[
+          const Icon(CupertinoIcons.person_2_alt),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('About'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'About',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -130,11 +145,15 @@ class _LogInDrawerState extends State<LogInDrawer> {
   Widget _DashboardDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(Icons.dashboard_rounded),
+        children: <Widget>[
+          const Icon(Icons.dashboard_rounded),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('Dashboard'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Dashboard',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -151,11 +170,15 @@ class _LogInDrawerState extends State<LogInDrawer> {
   Widget _HomeDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(CupertinoIcons.home),
+        children: <Widget>[
+          const Icon(CupertinoIcons.home),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('Home'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Home',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -175,9 +198,11 @@ class _LogInDrawerState extends State<LogInDrawer> {
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill, image: AssetImage('images/vaccine pic.jpg'))),
-      // image: AssetImage('images/covid_vaccine.jpeg'))),
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: AssetImage('images/covid_vaccine.jpeg'),
+        ),
+      ),
       child: Stack(
         children: const <Widget>[
           Positioned(

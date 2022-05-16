@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../homepage building blocks/floating_text.dart';
 import '../../homepage building blocks/top_bar_contents.dart';
 
@@ -31,7 +32,6 @@ class _UserSignInPageState extends State<UserSignInPage> {
   late ScrollController _scrollController;
   final double _scrollPosition = 0;
   double _opacity = 0.0;
-
 
   @override
   void initState() {
@@ -143,6 +143,14 @@ class UserSignIn extends StatefulWidget {
 class _UserSignInState extends State<UserSignIn> {
   bool _isObscure = true;
 
+  _incompleteCredentialsAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "Enter both username and password",
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -194,8 +202,6 @@ class _UserSignInState extends State<UserSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                keyboardType: TextInputType.number,
-                // cursorColor: Colors.tealAccent,
                 controller: usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
@@ -219,7 +225,7 @@ class _UserSignInState extends State<UserSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                  obscureText: _isObscure,
+                obscureText: _isObscure,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -233,45 +239,48 @@ class _UserSignInState extends State<UserSignIn> {
                   focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(18.0)),
                       borderSide: BorderSide(color: Colors.blueGrey)),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            _isObscure = !_isObscure;
-                          },
-                        );
-                      },
-                    ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _isObscure = !_isObscure;
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
           ),
           //---------------------------------------------------------------------------------------------------------
 
-          const Spacer4(),
+          const Spacer2(),
           Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: size.height / 10, maxWidth: size.width / 1.5),
+                  maxHeight: size.height / 10, maxWidth: size.width / 2),
               child: Text(
                 errorMessage,
-                style: TextStyle(color: Colors.red, fontSize: size.width / 40),
+                style: TextStyle(color: Colors.red, fontSize: size.height / 40),
               ),
             ),
           ),
           //---------------------------------------------------------------------------------------------------------
 
-          const Spacer2(),
+          const Spacer1(),
           SignInButton(
             pressed: () async {
               if (usernameController.text == '' ||
                   passwordController.text == '') {
                 print('Enter both username and password');
-                setState(() {
-                  errorMessage = 'Enter both username and password';
-                });
+                if (mounted) {
+                  setState(() {
+                    errorMessage = 'Enter both username and password';
+                  });
+                }
+                _incompleteCredentialsAlert(context);
               } else {
                 userLoginAction();
               }
@@ -310,11 +319,13 @@ class _UserSignInState extends State<UserSignIn> {
             docSnapShot.data()!["Vaccination Centre Name"].toString();
         print('$loginInt :' + appbarString);
 
-        setState(() {
-          errorMessage = '';
-          usernameController.text = '';
-          passwordController.text = '';
-        });
+        if (mounted) {
+          setState(() {
+            errorMessage = '';
+            usernameController.text = '';
+            passwordController.text = '';
+          });
+        }
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (context) => UserPage(
@@ -322,25 +333,40 @@ class _UserSignInState extends State<UserSignIn> {
                     )),
             (Route<dynamic> route) => false);
       } else {
-        print('Password doesn\'t  match: ${docSnapShot.data()!["Password"]}');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
-        setState(() {
-          errorMessage = 'Username or password Incorrect';
-        });
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Username or password Incorrect';
+          });
+        }
       }
 
       if (docSnapShot.data() == null) {
-        print('User not found');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
-        setState(() {
-          errorMessage = 'Username or password Incorrect';
-        });
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Username or password Incorrect';
+          });
+        }
       }
     } else {
+      _userNotFoundAlert(context);
       print('Username or password Incorrect');
-      setState(() {
-        errorMessage = 'Username or Password Incorrect';
-      });
+      if (mounted) {
+        setState(() {
+          errorMessage = 'Username or Password Incorrect';
+        });
+      }
     }
+  }
+
+  _userNotFoundAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "User not found",
+    ).show();
   }
 }

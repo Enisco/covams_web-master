@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:covams_web/utilities/responsive.dart';
 import 'package:flutter/material.dart';

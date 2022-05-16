@@ -69,7 +69,7 @@ class BottomBarForSmallScreen extends StatelessWidget {
           Center(
             child: SizedBox(
               width: size.width,
-              height: size.height * 0.20,
+              height: size.height * 0.35,
               child: const RightDownSmallScreen(),
             ),
           ),
@@ -436,8 +436,9 @@ class DownDown extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Text(
-      "© CopyRight 2020 | CoVaMS 2022",
+      "© CopyRight | CoVaMS 2022",
       style: TextStyle(
+          color: Colors.white54,
           fontSize: ResponsiveWidget.isSmallScreen(context)
               ? size.width / 30
               : size.width / 75,

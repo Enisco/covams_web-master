@@ -1,10 +1,8 @@
 import 'dart:ui';
-import 'package:covams_web/access%20pages/login%20pages/admin_signin_page.dart';
 import 'package:covams_web/blocs/appbar_string_bloc.dart';
 import 'package:covams_web/blocs/login_state_bloc.dart';
 import 'package:covams_web/blocs/login_string_bloc.dart';
 import 'package:covams_web/blocs/logintype_index.dart';
-import 'package:covams_web/main%20pages/about_us.dart';
 import 'package:covams_web/main%20pages/covams_homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:covams_web/utilities/theme_data.dart';
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AppBarStringBloc>(
           create: (BuildContext context) => AppBarStringBloc(),
         ),
-      ], 
+      ],
       child: ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
         builder: (_, ThemeMode currentMode, __) {
@@ -51,7 +49,8 @@ class MyApp extends StatelessWidget {
             darkTheme: darkThemeData,
             themeMode: currentMode,
             home: const CovamsHomePage(),
-            // home: const AdminSignInPage(),
+            // home: const AdminPage(),
+            // home: const VerifCentPage(),
           );
         },
       ),

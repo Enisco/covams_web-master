@@ -15,6 +15,7 @@ import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../homepage building blocks/floating_text.dart';
 import '../../homepage building blocks/top_bar_contents.dart';
 
@@ -152,6 +153,14 @@ class AdminSignIn extends StatefulWidget {
 class _AdminSignInState extends State<AdminSignIn> {
   bool _isObscure = true;
 
+  _incompleteCredentialsAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "Enter both username and password",
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -168,7 +177,6 @@ class _AdminSignInState extends State<AdminSignIn> {
             "Sign In as an Administrator",
             style: TextStyle(
               fontFamily: 'Poppins',
-              // color: Colors.black,
               fontSize: ResponsiveWidget.isSmallScreen(context)
                   ? size.width / 20
                   : size.width / 60,
@@ -204,8 +212,6 @@ class _AdminSignInState extends State<AdminSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                keyboardType: TextInputType.number,
-                // cursorColor: Colors.tealAccent,
                 controller: usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
@@ -229,7 +235,7 @@ class _AdminSignInState extends State<AdminSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                  obscureText: _isObscure,
+                obscureText: _isObscure,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -243,17 +249,17 @@ class _AdminSignInState extends State<AdminSignIn> {
                   focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(18.0)),
                       borderSide: BorderSide(color: Colors.blueGrey)),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            _isObscure = !_isObscure;
-                          },
-                        );
-                      },
-                    ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _isObscure = !_isObscure;
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -264,16 +270,16 @@ class _AdminSignInState extends State<AdminSignIn> {
           Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: size.height / 10, maxWidth: size.width / 1.5),
+                  maxHeight: size.height / 10, maxWidth: size.width / 2),
               child: Text(
                 errorMessage,
-                style: TextStyle(color: Colors.red, fontSize: size.width / 50),
+                style: TextStyle(color: Colors.red, fontSize: size.height / 40),
               ),
             ),
           ),
           //---------------------------------------------------------------------------------------------------------
 
-          const Spacer1(),
+          const Spacer2(),
           SignInButton(
             pressed: () async {
               if (usernameController.text == '' ||
@@ -284,6 +290,7 @@ class _AdminSignInState extends State<AdminSignIn> {
                     errorMessage = 'Enter both username and password';
                   });
                 }
+                _incompleteCredentialsAlert(context);
               } else {
                 adminLoginAction();
               }
@@ -331,7 +338,7 @@ class _AdminSignInState extends State<AdminSignIn> {
             MaterialPageRoute(builder: (context) => const AdminPage()),
             (Route<dynamic> route) => false);
       } else {
-        print('Password doesn\'t  match: ${docSnapShot.data()!["Password"]}');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
         if (mounted) {
           setState(() {
@@ -341,7 +348,7 @@ class _AdminSignInState extends State<AdminSignIn> {
       }
 
       if (docSnapShot.data() == null) {
-        print('User not found');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
         if (mounted) {
           setState(() {
@@ -350,6 +357,7 @@ class _AdminSignInState extends State<AdminSignIn> {
         }
       }
     } else {
+      _userNotFoundAlert(context);
       print('Username or password Incorrect');
       if (mounted) {
         setState(() {
@@ -357,5 +365,13 @@ class _AdminSignInState extends State<AdminSignIn> {
         });
       }
     }
+  }
+
+  _userNotFoundAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "User not found",
+    ).show();
   }
 }

@@ -5,6 +5,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:covams_web/components/buttons.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 TextEditingController fullameController = TextEditingController();
 TextEditingController surnameController = TextEditingController();
@@ -18,6 +19,7 @@ TextEditingController genderController = TextEditingController();
 TextEditingController emailAddressController = TextEditingController();
 TextEditingController passwordGivenController = TextEditingController();
 TextEditingController vaccIdController = TextEditingController();
+TextEditingController vaccineTypeController = TextEditingController();
 
 var userPhoneNumber;
 
@@ -52,22 +54,24 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
       "Phone Number": userPhoneNumber,
       "Means of Identification": mIdController.text,
       "Vaccination Centre Name": vaccHospNameController.text,
+      "Vaccine Type": vaccineTypeController.text,
       "First Jab Date": firstJabDate,
       "Second Jab Date": secondJabDate,
       "Booster Jab Date": boosterJabDate,
       "Password": passwordGivenController.text,
     }).then((value) {
       print("success!");
+      _successAlert(context);
+      resetTextControllers();
     });
   }
 
-  void goToSignUpSuccess() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const AddDetailsSuccess(),
-      ),
-    );
+  _successAlert(context) {
+    Alert(
+      context: context,
+      title: "SUCCESS",
+      desc: "New user data successfully saved",
+    ).show();
   }
 
   void resetTextControllers() {
@@ -77,11 +81,15 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
     ageController.text = '';
     addressController.text = '';
     vaccHospNameController.text = '';
+    vaccineTypeController.text = '';
     mIdController.text = '';
     genderController.text = '';
     emailAddressController.text = '';
     passwordGivenController.text = '';
     vaccIdController.text = '';
+    firstJabDate = null;
+    secondJabDate = null;
+    boosterJabDate = null;
   }
 
   @override
@@ -89,7 +97,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * 1.8,
+      height: size.height * 2.1,
       width: size.width,
       margin: EdgeInsets.symmetric(horizontal: size.width / 8, vertical: 10),
       child: SingleChildScrollView(
@@ -99,7 +107,6 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
             //---------------------------------------------------------------------------------------------------------
 
             const Spacer1(),
-            // const TopProgressLineMiddle(),
             const Spacer1(),
             //---------------------------------------------------------------------------------------------------------
 
@@ -116,7 +123,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
             ),
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: size.height / 20,
+                maxHeight: size.height / 15,
                 maxWidth: size.width,
               ),
               child: Text(
@@ -134,7 +141,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: surnameController,
                 cursorColor: Colors.blueGrey,
@@ -165,13 +172,11 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: firstnameController,
-                style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    // color: Colors.black,
-                    fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'First name',
                   labelStyle: const TextStyle(
@@ -198,12 +203,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: midnameController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Middle name',
                   labelStyle: const TextStyle(
@@ -229,12 +234,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: ageController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Age',
                   labelStyle: const TextStyle(
@@ -261,12 +266,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: genderController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Gender',
                   labelStyle: const TextStyle(
@@ -292,12 +297,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: emailAddressController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Email Address',
                   labelStyle: const TextStyle(
@@ -323,12 +328,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: addressController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Residential Address',
                   labelStyle: const TextStyle(
@@ -357,7 +362,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: IntlPhoneField(
                 initialCountryCode: 'NG',
                 flagsButtonMargin: const EdgeInsets.fromLTRB(
@@ -407,12 +412,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: mIdController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Means of Identification',
                   labelStyle: const TextStyle(
@@ -438,18 +443,49 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: vaccHospNameController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Vaccination centre name',
                   labelStyle: const TextStyle(
                     fontFamily: 'Poppins',
                   ),
                   hintText: "Enter Vaccination centre name",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                      borderSide: BorderSide(color: Colors.blueGrey)),
+                  hintStyle: const TextStyle(
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ),
+            ),
+            //---------------------------------------------------------------------------------------------------------
+
+            const Spacer2(),
+            //---------------------------------------------------------------------------------------------------------
+
+            SizedBox(
+              width: size.width,
+              height: size.height / 14,
+              child: TextField(
+                controller: vaccineTypeController,
+                cursorColor: Colors.blueGrey,
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                decoration: InputDecoration(
+                  labelText: 'Type of Vaccine Administered',
+                  labelStyle: const TextStyle(
+                    fontFamily: 'Poppins',
+                  ),
+                  hintText: "Enter the type of vaccine administered",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -489,7 +525,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 25,
+              height: size.height / 14,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -497,7 +533,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                     "First Jab     ",
                     style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontSize: size.height / 65,
+                        fontSize: size.height / 55,
                         fontWeight: FontWeight.w300),
                   ),
                   IconButton(
@@ -527,11 +563,10 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                 border: Border.all(
                   color: Colors.grey.shade600,
                 ),
-                // color: Colors.grey[200],
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 25,
+              height: size.height / 14,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -539,7 +574,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                     "Second Jab",
                     style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontSize: size.height / 65,
+                        fontSize: size.height / 55,
                         fontWeight: FontWeight.w300),
                   ),
                   IconButton(
@@ -572,7 +607,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               width: size.width,
-              height: size.height / 25,
+              height: size.height / 14,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -580,7 +615,7 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
                     "Booster Jab",
                     style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontSize: size.height / 65,
+                        fontSize: size.height / 55,
                         fontWeight: FontWeight.w300),
                   ),
                   IconButton(
@@ -607,12 +642,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: vaccIdController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Vaccination ID',
                   labelStyle: const TextStyle(
@@ -638,12 +673,12 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
 
             SizedBox(
               width: size.width,
-              height: size.height / 18,
+              height: size.height / 14,
               child: TextField(
                 controller: passwordGivenController,
                 cursorColor: Colors.blueGrey,
-                style: const TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                // style: const TextStyle(
+                //     fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   labelStyle: const TextStyle(
@@ -734,14 +769,5 @@ class _RegisterUserDetailsState extends State<RegisterUserDetails> {
         print(boosterJabDate);
       });
     }
-  }
-}
-
-class AddDetailsSuccess extends StatelessWidget {
-  const AddDetailsSuccess({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

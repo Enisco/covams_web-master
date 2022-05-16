@@ -44,8 +44,11 @@ class _CovamDrawerState extends State<CovamDrawer> {
           const Spacer2(),
           const Center(
             child: Text(
-              "© CopyRight 2020 | CoVaMS 2022",
-              style: TextStyle(fontSize: 10, fontFamily: 'Montserrat'),
+              "© CopyRight | CoVaMS 2022",
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white54,
+                  fontFamily: 'Montserrat'),
             ),
           ),
           const Spacer2(),
@@ -60,11 +63,15 @@ class _CovamDrawerState extends State<CovamDrawer> {
   Widget _MyAccountDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(CupertinoIcons.square_favorites_alt),
+        children: <Widget>[
+          const Icon(CupertinoIcons.square_favorites_alt),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('My Account'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'My Account',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -81,11 +88,15 @@ class _CovamDrawerState extends State<CovamDrawer> {
   Widget _AboutDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(CupertinoIcons.person_2_alt),
+        children: <Widget>[
+          const Icon(CupertinoIcons.person_2_alt),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('About'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'About',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -102,11 +113,15 @@ class _CovamDrawerState extends State<CovamDrawer> {
   Widget _DashboardDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(Icons.dashboard_rounded),
+        children: <Widget>[
+          const Icon(Icons.dashboard_rounded),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('Dashboard'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Dashboard',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -123,11 +138,15 @@ class _CovamDrawerState extends State<CovamDrawer> {
   Widget _HomeDrawerItem() {
     return ListTile(
       title: Row(
-        children: const <Widget>[
-          Icon(CupertinoIcons.home),
+        children: <Widget>[
+          const Icon(CupertinoIcons.home),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text('Home'),
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Home',
+              style: TextStyle(
+                  color: Colors.blueGrey[100], fontWeight: FontWeight.w600),
+            ),
           )
         ],
       ),
@@ -148,7 +167,6 @@ class _CovamDrawerState extends State<CovamDrawer> {
       decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.fill,
-              // image: AssetImage('images/vaccine pic.png'))),
               image: AssetImage('images/covid_vaccine.jpeg'))),
       child: Stack(
         children: const <Widget>[

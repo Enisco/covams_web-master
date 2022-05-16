@@ -15,6 +15,7 @@ import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../homepage building blocks/floating_text.dart';
 import '../../homepage building blocks/top_bar_contents.dart';
 
@@ -152,6 +153,14 @@ class HospVaccCentreSignIn extends StatefulWidget {
 class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
   bool _isObscure = true;
 
+  _incompleteCredentialsAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "Enter both username and password",
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -203,8 +212,6 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                keyboardType: TextInputType.number,
-                // cursorColor: Colors.tealAccent,
                 controller: usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
@@ -228,7 +235,7 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
               width: size.width * 0.75,
               height: size.height / 11,
               child: TextField(
-                  obscureText: _isObscure,
+                obscureText: _isObscure,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -242,45 +249,48 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
                   focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(18.0)),
                       borderSide: BorderSide(color: Colors.blueGrey)),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            _isObscure = !_isObscure;
-                          },
-                        );
-                      },
-                    ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _isObscure = !_isObscure;
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
           ),
           //---------------------------------------------------------------------------------------------------------
 
-          const Spacer4(),
+          const Spacer2(),
           Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: size.height / 10, maxWidth: size.width / 1.5),
+                  maxHeight: size.height / 10, maxWidth: size.width / 2),
               child: Text(
                 errorMessage,
-                style: TextStyle(color: Colors.red, fontSize: size.width / 40),
+                style: TextStyle(color: Colors.red, fontSize: size.height / 40),
               ),
             ),
           ),
           //---------------------------------------------------------------------------------------------------------
 
-          const Spacer2(),
+          const Spacer1(),
           SignInButton(
             pressed: () async {
               if (usernameController.text == '' ||
                   passwordController.text == '') {
                 print('Enter both username and password');
-                setState(() {
-                  errorMessage = 'Enter both username and password';
-                });
+                if (mounted) {
+                  setState(() {
+                    errorMessage = 'Enter both username and password';
+                  });
+                }
+                _incompleteCredentialsAlert(context);
               } else {
                 hospVaccCentLoginAction();
               }
@@ -330,7 +340,7 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
         // Navigator.pushReplacement(context,
         //     MaterialPageRoute(builder: (context) => const HospVaccCentPage()));
       } else {
-        print('Password doesn\'t  match: ${docSnapShot.data()!["Password"]}');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
         setState(() {
           errorMessage = 'Username or password Incorrect';
@@ -338,17 +348,26 @@ class _HospVaccCentreSignInState extends State<HospVaccCentreSignIn> {
       }
 
       if (docSnapShot.data() == null) {
-        print('User not found');
+        _userNotFoundAlert(context);
         print('Username or password Incorrect');
         setState(() {
           errorMessage = 'Username or password Incorrect';
         });
       }
     } else {
+      _userNotFoundAlert(context);
       print('Username or password Incorrect');
       setState(() {
         errorMessage = 'Username or password Incorrect';
       });
     }
+  }
+
+  _userNotFoundAlert(context) {
+    Alert(
+      context: context,
+      title: "ERROR",
+      desc: "User not found",
+    ).show();
   }
 }

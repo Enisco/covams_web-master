@@ -3,7 +3,6 @@
 import 'package:covams_web/access%20pages/data%20addition%20pages/reg_newuser_details.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/loggedin_drawer.dart';
 import 'package:covams_web/access%20pages/loggedin%20components/top_bar_logged_in.dart';
-import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
@@ -78,8 +77,8 @@ class _HospVaccCentPageState extends State<HospVaccCentPage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarLoggedInContent(_opacity),
             ),
-        // drawer: const CovamDrawer(),
-        drawer: const LogInDrawer(),
+      // drawer: const CovamDrawer(),
+      drawer: const LogInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

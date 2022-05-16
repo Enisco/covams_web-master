@@ -16,6 +16,7 @@ String fullName = '',
     jab2Date = '',
     boosterJabDate = '',
     hospVaccCentre = '',
+    vaccineType = '',
     errorMessage = '';
 int dataExists = 0;
 
@@ -345,6 +346,31 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const SeperationLine(),
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
+
+                          RichText(
+                            text: TextSpan(
+                              text: 'Received Vaccine Type: ',
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: fontsize,
+                                fontWeight: FontWeight.w300,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: vaccineType,
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: fontsize,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SpacerSmall(),
+                          const SeperationLine(),
+                          const Spacer1(),
+                          //----------------------------------------------------------------------------------
                         ],
                       ),
                     ],
@@ -381,6 +407,7 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
       boosterJabDate = docSnapShot.data()!["Booster Jab Date"].toString();
       hospVaccCentre =
           docSnapShot.data()!["Vaccination Centre Name"].toString();
+      vaccineType = docSnapShot.data()!["Vaccine Type"].toString();
 
       print('$fullName\n$address\n$boosterJabDate');
     } else {
