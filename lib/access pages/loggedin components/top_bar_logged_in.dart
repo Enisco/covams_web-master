@@ -334,14 +334,3 @@ class _TopBarLoggedInContentState extends State<TopBarLoggedInContent> {
     });
   }
 }
-
-// class MyPage extends StatelessWidget {
-//   MyPage({Key? key, required this.mypage}) : super(key: key);
-
-//   Widget mypage;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return mypage;
-//   }
-// }
