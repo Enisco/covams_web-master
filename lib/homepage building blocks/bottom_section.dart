@@ -2,18 +2,26 @@ import 'package:covams_web/utilities/responsive.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../components/my_spacers.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-String ourWhatsappUrl = 'https://wa.link/o20n95';
+// String ourWhatsappUrl = 'https://wa.link/o20n95';
+const String ourWhatsappUrl =
+    "https://api.whatsapp.com/send/?phone=2349032242379";
+//     "https://api.whatsapp.com/send/?phone=2348101564160";
+
 //--------------------------------------------------------------------------------------
 
-void goToOurWhatsapp(String ourWhatsappUrl) async {
-  if (await canLaunch(ourWhatsappUrl)) {
-    await launch(
+void goToOurWhatsapp(String ourWhatsappUrl) {
+  try {
+    launchUrlString(
       ourWhatsappUrl,
+      // mode: LaunchMode.externalNonBrowserApplication,
+      webViewConfiguration: const WebViewConfiguration(
+        enableJavaScript: false,
+      ),
     );
-  } else {
+  } catch (e) {
     throw 'Could not launch $ourWhatsappUrl';
   }
 }
@@ -69,7 +77,7 @@ class BottomBarForSmallScreen extends StatelessWidget {
           Center(
             child: SizedBox(
               width: size.width,
-              height: size.height * 0.35,
+              height: size.height * 0.20,
               child: const RightDownSmallScreen(),
             ),
           ),
@@ -259,14 +267,18 @@ class RightDownSmallScreen extends StatelessWidget {
                 icon: Icon(
                   FontAwesomeIcons.facebook,
                   color: Colors.blue,
-                  size: size.width / 20,
+                  size: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                 ),
                 onPressed: () {},
               ),
               Text(
                 "Facebook",
                 style: TextStyle(
-                  fontSize: size.width / 20,
+                  fontSize: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                   color: Colors.white60,
                 ),
               ),
@@ -283,21 +295,24 @@ class RightDownSmallScreen extends StatelessWidget {
                 icon: Icon(
                   FontAwesomeIcons.twitter,
                   color: Colors.blue,
-                  size: size.width / 20,
+                  size: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                 ),
                 onPressed: () {},
               ),
               Text(
                 "Twitter",
                 style: TextStyle(
-                  fontSize: size.width / 20,
+                  fontSize: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                   color: Colors.white60,
                 ),
               ),
             ],
           ),
         ),
-        const HSpacer1(),
         //----------------------------------
 
         TextButton(
@@ -308,14 +323,18 @@ class RightDownSmallScreen extends StatelessWidget {
                 icon: Icon(
                   FontAwesomeIcons.youtube,
                   color: Colors.red,
-                  size: size.width / 20,
+                  size: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                 ),
                 onPressed: () {},
               ),
               Text(
                 "YouTube",
                 style: TextStyle(
-                  fontSize: size.width / 20,
+                  fontSize: ResponsiveWidget.isSmallScreen(context)
+                      ? size.width / 25
+                      : size.width / 75,
                   color: Colors.white60,
                 ),
               ),

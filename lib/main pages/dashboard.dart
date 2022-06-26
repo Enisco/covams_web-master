@@ -83,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
             ),
       // drawer: const CovamDrawer(),
       // drawer: const LogInDrawer(),
-      drawer: loginInt == 0 ? const CovamDrawer() : const LogInDrawer(),
+      drawer: loginInt == 0 ? const CovamDrawer() : const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

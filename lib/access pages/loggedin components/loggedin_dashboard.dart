@@ -78,7 +78,7 @@ class _LoggedInDashboardState extends State<LoggedInDashboard> {
               preferredSize: Size(size.width, 1000),
               child: TopBarLoggedInContent(_opacity),
             ),
-      drawer: const LogInDrawer(),
+      drawer: const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

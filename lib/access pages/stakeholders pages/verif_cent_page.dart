@@ -77,8 +77,7 @@ class _VerifCentPageState extends State<VerifCentPage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarLoggedInContent(_opacity),
             ),
-        // drawer: const CovamDrawer(),
-        drawer: const LogInDrawer(),
+        drawer: const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

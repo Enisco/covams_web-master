@@ -12,14 +12,14 @@ import 'package:covams_web/main%20pages/covams_homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LogInDrawer extends StatefulWidget {
-  const LogInDrawer({Key? key}) : super(key: key);
+class LoggedInDrawer extends StatefulWidget {
+  const LoggedInDrawer({Key? key}) : super(key: key);
 
   @override
-  State<LogInDrawer> createState() => _LogInDrawerState();
+  State<LoggedInDrawer> createState() => _LoggedInDrawerState();
 }
 
-class _LogInDrawerState extends State<LogInDrawer> {
+class _LoggedInDrawerState extends State<LoggedInDrawer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

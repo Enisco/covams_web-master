@@ -84,7 +84,7 @@ class _AboutpageState extends State<Aboutpage> {
             ),
       // drawer: const CovamDrawer(),
       // drawer: const LogInDrawer(),
-      drawer: loginInt == 0 ? const CovamDrawer() : const LogInDrawer(),
+      drawer: loginInt == 0 ? const CovamDrawer() : const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -137,47 +137,40 @@ class AboutWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width / 20, vertical: 10),
-      height: size.height / 3,
+      // height: size.height / 3,
       width: size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Spacer2(),
-          Text(
-            "About us",
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: size.height / 30,
-              fontWeight: FontWeight.w700,
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, size.height / 10, 0, 0),
+            child: Text(
+              "About us",
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: size.height / 30,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           const Spacer2(),
           //---------------------------------------------------------------------------------------------------------
 
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: size.width,
-              maxHeight: ResponsiveWidget.isSmallScreen(context)
-                  ? (size.height / 3)
-                  : (size.height / 3),
-            ),
-            child: Wrap(
-              children: [
-                Text(
-                  'The COVID-19 Vaccination Management System (CoVaMS) is a platform '
-                  'which serves as a central database where all the details of '
-                  'vaccinated citizens are stored for ease of mobile accessibility, '
-                  'especially for confirmation and verification at any point of necessity.'
-                  'With CoVaMS, the details of a vaccinated citizen can be '
-                  'confirmed, tracked and updated with ease.',
-                  style: TextStyle(
-                    fontSize: ResponsiveWidget.isSmallScreen(context)
-                        ? (size.width / 35)
-                        : (size.width / 75),
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, size.height / 10),
+            child: Text(
+              'The COVID-19 Vaccination Management System (CoVaMS) is a platform '
+              'which serves as a central database where all the details of '
+              'vaccinated citizens are stored for ease of mobile accessibility, '
+              'especially for confirmation and verification at any point of necessity.'
+              'With CoVaMS, the details of a vaccinated citizen can be '
+              'confirmed, tracked and updated with ease.',
+              style: TextStyle(
+                fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 20,
+                fontWeight: FontWeight.w400,
+                wordSpacing: 2,
+              ),
             ),
           ),
           const Spacer3(),

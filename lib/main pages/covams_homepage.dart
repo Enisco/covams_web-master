@@ -3,12 +3,13 @@ import 'package:covams_web/blocs/logintype_index.dart';
 import 'package:covams_web/components/my_spacers.dart';
 import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:covams_web/homepage%20building%20blocks/covam_drawer.dart';
+import 'package:covams_web/homepage%20building%20blocks/hosts_carousels.dart';
+import 'package:covams_web/homepage%20building%20blocks/partners_carousels.dart';
 import 'package:flutter/material.dart';
 import '../homepage building blocks/featured_heading.dart';
 import '../homepage building blocks/featured_tiles.dart';
 import '../homepage building blocks/floating_text.dart';
 import '../homepage building blocks/host_partners_heading.dart';
-import '../homepage building blocks/host_partners_carousel.dart';
 import '../homepage building blocks/web_scrollbar.dart';
 import '../utilities/responsive.dart';
 import '../homepage building blocks/top_bar_contents.dart';
@@ -23,27 +24,25 @@ class CovamsHomePage extends StatefulWidget {
 
 class _CovamsHomePageState extends State<CovamsHomePage> {
   late ScrollController _scrollController;
-  double _scrollPosition = 0;
-  double _opacity = 0.0;
-
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
+  double _opacity = 0.0, _scrollPosition = 0.0;
 
   @override
   void initState() {
-    _scrollController = ScrollController();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        setState(() {
+          _scrollPosition = _scrollController.offset;
+        });
+      });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    _opacity = _scrollPosition < size.height * 0.40
-        ? _scrollPosition / (size.height * 0.40)
-        : 1;
+    // _opacity = colorTopBarBackground ? 0.8 : 0.3;
+    _opacity = _scrollPosition >= size.height * 0.40 ? 0.8 : 0.3;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -59,12 +58,14 @@ class _CovamsHomePageState extends State<CovamsHomePage> {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () {
-                    setState(() {
-                      MyApp.themeNotifier.value =
-                          MyApp.themeNotifier.value == ThemeMode.light
-                              ? ThemeMode.dark
-                              : ThemeMode.light;
-                    });
+                    setState(
+                      () {
+                        MyApp.themeNotifier.value =
+                            MyApp.themeNotifier.value == ThemeMode.light
+                                ? ThemeMode.dark
+                                : ThemeMode.light;
+                      },
+                    );
                   },
                 ),
               ],
@@ -83,9 +84,7 @@ class _CovamsHomePageState extends State<CovamsHomePage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarContents(_opacity),
             ),
-        // drawer: const CovamDrawer(),
-        // drawer: const LogInDrawer(),
-        drawer: loginInt == 0? const CovamDrawer(): const LogInDrawer(),
+      drawer: loginInt == 0 ? const CovamDrawer() : const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
@@ -118,15 +117,17 @@ class _CovamsHomePageState extends State<CovamsHomePage> {
                         screenSize: size,
                       ),
                       FeaturedTiles(screenSize: size),
-                      const Spacer4(),
+                      const Spacer3(),
                       //----------------------------------------------------------------
 
                       HostMinistriesHeading(screenSize: size),
-                      SizedBox(height: size.height / 10),
+                      const Spacer3(),
                       const HostMinistriesCarousel(),
+                      const Spacer5(),
                       PartnersHeading(screenSize: size),
-                      SizedBox(height: size.height / 10),
+                      const Spacer3(),
                       const PartnersCarousel(),
+                      const Spacer5(),
                     ],
                   ),
                 ],

@@ -81,8 +81,7 @@ class _AdminPageState extends State<AdminPage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarLoggedInContent(_opacity,),
             ),
-        // drawer: const CovamDrawer(),
-        drawer: const LogInDrawer(),
+        drawer: const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

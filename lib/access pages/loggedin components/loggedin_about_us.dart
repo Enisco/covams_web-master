@@ -79,8 +79,7 @@ class _LoggedInAboutpageState extends State<LoggedInAboutpage> {
               preferredSize: Size(size.width, 1000),
               child: TopBarLoggedInContent(_opacity),
             ),
-      drawer: const LogInDrawer(),
-      // drawer: const CovamDrawer(),
+      drawer: const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(

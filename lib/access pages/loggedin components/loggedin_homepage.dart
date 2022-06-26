@@ -5,8 +5,9 @@ import 'package:covams_web/homepage%20building%20blocks/bottom_section.dart';
 import 'package:covams_web/homepage%20building%20blocks/featured_heading.dart';
 import 'package:covams_web/homepage%20building%20blocks/featured_tiles.dart';
 import 'package:covams_web/homepage%20building%20blocks/floating_text.dart';
-import 'package:covams_web/homepage%20building%20blocks/host_partners_carousel.dart';
 import 'package:covams_web/homepage%20building%20blocks/host_partners_heading.dart';
+import 'package:covams_web/homepage%20building%20blocks/hosts_carousels.dart';
+import 'package:covams_web/homepage%20building%20blocks/partners_carousels.dart';
 import 'package:covams_web/homepage%20building%20blocks/web_scrollbar.dart';
 import 'package:covams_web/main.dart';
 import 'package:covams_web/utilities/responsive.dart';
@@ -83,8 +84,7 @@ class _LoggedInHomePageState extends State<LoggedInHomePage> {
                 _opacity,
               ),
             ),
-      drawer: const LogInDrawer(),
-      // drawer: const CovamDrawer(),
+      drawer: const LoggedInDrawer(),
       //-----------------------------------------------------------------------------
 
       body: WebScrollbar(
