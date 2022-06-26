@@ -3,6 +3,7 @@
 // import 'package:firebase_flutter_demo/my_spacers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covams_web/components/my_spacers.dart';
+import 'package:covams_web/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 
 String fullName = '',
@@ -38,6 +39,8 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var marginRequired = ResponsiveWidget.isSmallScreen(context)
+          ? EdgeInsets.only(left:size.width / 15) : EdgeInsets.only(left:size.width / 3.2);
     var fontsize = size.height / 45;
     retrieveData(widget.userUniqueID);
 
@@ -50,46 +53,51 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                 style: TextStyle(fontSize: size.width / 40, color: Colors.red),
               ),
             )
-          : Center(
-              child: SizedBox(
-                height: size.height * 0.9,
-                child: Center(
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Spacer3(),
-                      Center(
-                        child: Text(
-                          'Details of user with ID: ' + widget.userUniqueID,
-                          style: TextStyle(
-                              fontSize: size.height / 35,
-                              fontWeight: FontWeight.w500),
-                        ),
+          : SizedBox(
+              // margin :marginRequired,,
+              height: size.height * 0.9,
+              child: Center(
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Spacer3(),
+                    Center(
+                      child: Text(
+                        'Details of user with ID: ' + widget.userUniqueID,
+                        style: TextStyle(
+                            fontSize: size.height / 35,
+                            fontWeight: FontWeight.w500),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    ),
+                    Container(
+                    //   margin :marginRequired,,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Spacer3(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Full name: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: fullName,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Full name: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: fullName,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -97,24 +105,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Age: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: age,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Age: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: age,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -122,24 +133,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Gender: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: gender,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Gender: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: gender,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -147,24 +161,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Residential Address: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: address,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Residential Address: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: address,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -172,24 +189,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Phone Number: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: phoneNumber,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Phone Number: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: phoneNumber,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -197,24 +217,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Email Address: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: emailAddress,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Email Address: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: emailAddress,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -222,24 +245,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Means of Identification: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: mId,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Means of Identification: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: mId,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -247,24 +273,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'First Jab Date: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: jab1Date,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'First Jab Date: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: jab1Date,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -272,24 +301,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Second Jab Date: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: jab2Date,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Second Jab Date: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: jab2Date,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -297,24 +329,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Booster Jab Date: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: boosterJabDate,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Booster Jab Date: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: boosterJabDate,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -322,24 +357,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Vaccination Centre Name: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: hospVaccCentre,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Vaccination Centre Name: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: hospVaccCentre,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -347,24 +385,27 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           const Spacer1(),
                           //----------------------------------------------------------------------------------
 
-                          RichText(
-                            text: TextSpan(
-                              text: 'Received Vaccine Type: ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: vaccineType,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: fontsize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          Padding(
+                            padding :marginRequired,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Received Vaccine Type: ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: fontsize,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                              ],
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: vaccineType,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: fontsize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SpacerSmall(),
@@ -373,8 +414,8 @@ class _RetrieveDataFromStoreState extends State<RetrieveDataFromStore> {
                           //----------------------------------------------------------------------------------
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

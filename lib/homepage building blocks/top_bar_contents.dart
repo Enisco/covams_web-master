@@ -187,7 +187,7 @@ class _TopBarContentsState extends State<TopBarContents> {
               ),
               //--------------------------------------------------------------------------------
 
-              Container(
+              SizedBox(
                 width: size.width / 7,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
